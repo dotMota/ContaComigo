@@ -38,25 +38,6 @@ A API ContaComigo é uma aplicação desenvolvida para facilitar a divisão de d
 - Mantenha um registro de quais despesas foram pagas por cada usuário.
 - Informe o saldo atual de cada usuário em relação ao grupo (quanto ele deve ou quanto tem a receber).
 
-## Arquitetura do Software - Domain-Driven Design (DDD)
-
-A ContaComigo API utiliza o Domain-Driven Design (DDD) para organizar o código em torno do domínio da aplicação, mantendo uma ligação estreita com as regras de negócio. Algumas diretrizes incluem:
-
-- Camadas: O projeto é dividido em camadas bem definidas, como "Application", "Domain" e "Infrastructure".
-- Entidades: São definidas classes de entidades que representam os principais conceitos do domínio, como "User", "Group" e "Expense".
-- Aggregates: Entidades relacionadas são agrupadas em agregados para melhorar o gerenciamento e a consistência dos dados.
-- Repositórios: Interfaces de repositório são criadas para abstrair o acesso ao banco de dados, permitindo uma fácil troca de tecnologias de armazenamento.
-- Serviços de Domínio: Lógicas de negócio complexas são implementadas em serviços de domínio para manter a coesão.
-- Value Objects: Value Objects são usados para representar conceitos imutáveis, como "Money" ou "Date".
-
-## Etapas do Desenvolvimento
-
-O desenvolvimento será realizado em etapas incrementais, seguindo uma abordagem Agile, permitindo o desenvolvimento e teste gradual das funcionalidades.
-
-## Testes e Validação
-
-Testes unitários e de integração serão realizados durante todo o desenvolvimento para garantir a correta funcionalidade da API.
-
 ## Documentação e Publicação
 
 Ao concluir o desenvolvimento, será criada uma documentação detalhada da API, explicando como utilizá-la. A API será disponibilizada em um servidor web seguro para os usuários.
