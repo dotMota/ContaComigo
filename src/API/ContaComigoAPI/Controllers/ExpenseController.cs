@@ -15,14 +15,14 @@ namespace ContaComigoAPI.Controllers
             _expenseService = expenseService;
         }
 
-        [HttpPost]
+        [HttpPost("CreateExpense")]
         public IActionResult CreateExpense([FromBody] Expense expense)
         {
             var createdExpense = _expenseService.CreateExpense(expense);
             return Ok(createdExpense);
         }
 
-        [HttpPut("{expenseId}")]
+        [HttpPut("UpdateExpenseByExpenseId")]
         public IActionResult UpdateExpense(int expenseId, [FromBody] Expense expense)
         {
             try
@@ -42,7 +42,7 @@ namespace ContaComigoAPI.Controllers
             }
         }
 
-        [HttpDelete("{expenseId}")]
+        [HttpDelete("DeleteExpenseByExpenseId")]
         public IActionResult DeleteExpense(int expenseId)
         {
             try
@@ -56,7 +56,7 @@ namespace ContaComigoAPI.Controllers
             }
         }
 
-        [HttpGet("{expenseId}")]
+        [HttpGet("GetExpenseByExpenseId}")]
         public IActionResult GetExpenseById(int expenseId)
         {
             try
