@@ -1,10 +1,10 @@
-﻿using ContaComigoAPI.Models;
+﻿using System.Threading.Tasks;
+using ContaComigoAPI.Models;
 
 namespace ContaComigoAPI.Interfaces
 {
     public interface IUserService
     {
-        UserModel CreateUser(UserModel user);
-
+        Task<UserModel> CreateUserAsync(UserModel user);
     }
 }

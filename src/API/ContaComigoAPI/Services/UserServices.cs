@@ -1,5 +1,6 @@
 ﻿using ContaComigoAPI.Interfaces;
 using ContaComigoAPI.Models;
+using static ContaComigoAPI.Services.VerificationServices;
 
 namespace ContaComigoAPI.Services
 {
@@ -12,16 +13,43 @@ namespace ContaComigoAPI.Services
             _users = new List<UserModel>();
         }
 
-        public UserModel CreateUser(UserModel user)
+        public async Task<UserModel> CreateUserAsync(UserModel user)
         {
             user.UserId = Guid.NewGuid();
+            user.UserSensitiveInfo = new UserSensitiveInfoModel
+            {
+                UserPasswordHash = "" // [ ] Hash 
+            };
+
+            bool verifyEmail = true;
+            bool verifyPhone = true;
+            bool verifyDocument = true;
+
+            if (verifyEmail)
+            {
+                string verifiedEmail = await VerificationServices.EmailVerification.SendVerificationCode(user.UserEmail);
+                user.UserEmail = verifiedEmail;
+            }
+
+            if (verifyPhone)
+            {
+                string verifiedPhone = await VerificationServices.PhoneVerification.SendVerificationCode(user.UserPhoneNumber);
+                user.UserPhoneNumber = verifiedPhone;
+            }
+
+            if (verifyDocument)
+            {
+                user.UserDocument = DocumentVerification.NormalizeDocument(user.UserDocument);
+            }
+
             _users.Add(user);
 
-            // [ ] Insert new user in DB
+            // [ ] Insere o novo usuário no banco de dados
             return user;
         }
-        // [ ] RemoveUserByID
-        // [ ] UpdateUserByID
-        // [ ] GetUserByID
+
+
+        // Implementação da remoção do usuário
+        // Implementação da atualização do usuário
     }
 }

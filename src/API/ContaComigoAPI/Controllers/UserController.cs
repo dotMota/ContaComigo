@@ -1,5 +1,5 @@
-﻿using ContaComigoAPI.Interfaces;
-using ContaComigoAPI.Models;
+﻿using ContaComigoAPI.Models;
+using ContaComigoAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContaComigoAPI.Controllers
@@ -18,7 +18,7 @@ namespace ContaComigoAPI.Controllers
         [HttpPost("CreateUser")]
         public IActionResult CreateUser([FromBody] UserModel user)
         {
-            var createdUser = _userService.CreateUser(user);
+            var createdUser = _userService.CreateUserAsync(user);
             return Ok(createdUser);
         }
     }
