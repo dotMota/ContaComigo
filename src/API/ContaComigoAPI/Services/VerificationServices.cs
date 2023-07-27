@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace ContaComigoAPI.Services
 {
-    public class VerificationService
+    public class VerificationServices
     {
         private static Dictionary<string, string> emailVerificationCodes = new Dictionary<string, string>();
         private static Dictionary<string, string> phoneVerificationCodes = new Dictionary<string, string>();
