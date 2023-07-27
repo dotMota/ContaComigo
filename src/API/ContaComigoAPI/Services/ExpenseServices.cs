@@ -1,35 +1,36 @@
-﻿using ContaComigoAPI.Models;
+﻿using ContaComigoAPI.Interfaces;
+using ContaComigoAPI.Models;
 
 namespace ContaComigoAPI.Services
 {
     public class ExpenseServices : IExpenseService
     {
-        private List<Expense> expenseList;
+        private List<ExpenseModel> expenseList;
         private int nextExpenseId;
 
         public ExpenseServices()
         {
-            expenseList = new List<Expense>();
+            expenseList = new List<ExpenseModel>();
             nextExpenseId = 1;
         }
 
-        public Expense CreateExpense(Expense expense)
+        public ExpenseModel CreateExpense(ExpenseModel expense)
         {
-            expense.IdExpense = nextExpenseId;
+            expense.ExpenseId = nextExpenseId;
             nextExpenseId++;
             expenseList.Add(expense);
             return expense;
         }
 
-        public Expense UpdateExpense(Expense expense)
+        public ExpenseModel UpdateExpense(ExpenseModel expense)
         {
-            var existingExpense = expenseList.Find(e => e.IdExpense == expense.IdExpense);
+            var existingExpense = expenseList.Find(e => e.ExpenseId == expense.ExpenseId);
             if (existingExpense != null)
             {
-                existingExpense.Name = expense.Name;
-                existingExpense.Description = expense.Description;
-                existingExpense.Value = expense.Value;
-                existingExpense.PayDay = expense.PayDay;
+                existingExpense.ExpenseName = expense.ExpenseName;
+                existingExpense.ExpenseDescription = expense.ExpenseDescription;
+                existingExpense.ExpenseValue = expense.ExpenseValue;
+                existingExpense.ExpensePayDay = expense.ExpensePayDay;
                 return existingExpense;
             }
             else
@@ -40,7 +41,7 @@ namespace ContaComigoAPI.Services
 
         public void DeleteExpense(int expenseId)
         {
-            var expenseToDelete = expenseList.Find(e => e.IdExpense == expenseId);
+            var expenseToDelete = expenseList.Find(e => e.ExpenseId == expenseId);
             if (expenseToDelete != null)
             {
                 expenseList.Remove(expenseToDelete);
@@ -51,9 +52,9 @@ namespace ContaComigoAPI.Services
             }
         }
 
-        public Expense GetExpenseById(int expenseId)
+        public ExpenseModel GetExpenseById(int expenseId)
         {
-            var expense = expenseList.Find(e => e.IdExpense == expenseId);
+            var expense = expenseList.Find(e => e.ExpenseId == expenseId);
             if (expense != null)
             {
                 return expense;

@@ -1,5 +1,5 @@
-﻿using ContaComigoAPI.Models;
-using ContaComigoAPI.Services;
+﻿using ContaComigoAPI.Interfaces;
+using ContaComigoAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContaComigoAPI.Controllers
@@ -15,20 +15,20 @@ namespace ContaComigoAPI.Controllers
             _expenseService = expenseService;
         }
 
-        [HttpPost]
-        public IActionResult CreateExpense([FromBody] Expense expense)
+        [HttpPost("CreateExpense")]
+        public IActionResult CreateExpense([FromBody] ExpenseModel expense)
         {
             var createdExpense = _expenseService.CreateExpense(expense);
             return Ok(createdExpense);
         }
 
-        [HttpPut("{expenseId}")]
-        public IActionResult UpdateExpense(int expenseId, [FromBody] Expense expense)
+        [HttpPut("UpdateExpenseById")]
+        public IActionResult UpdateExpense(int expenseId, [FromBody] ExpenseModel expense)
         {
             try
             {
                 // Verifica se o ID informado corresponde ao ID no corpo da requisição
-                if (expenseId != expense.IdExpense)
+                if (expenseId != expense.ExpenseId)
                 {
                     return BadRequest("ID mismatch between route and request body.");
                 }
@@ -42,7 +42,7 @@ namespace ContaComigoAPI.Controllers
             }
         }
 
-        [HttpDelete("{expenseId}")]
+        [HttpDelete("DeleteExpenseById")]
         public IActionResult DeleteExpense(int expenseId)
         {
             try
@@ -56,7 +56,7 @@ namespace ContaComigoAPI.Controllers
             }
         }
 
-        [HttpGet("{expenseId}")]
+        [HttpGet("GetExpenseById")]
         public IActionResult GetExpenseById(int expenseId)
         {
             try

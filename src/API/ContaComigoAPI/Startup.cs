@@ -2,6 +2,7 @@
 using ContaComigoAPI.Models;
 using ContaComigoAPI.Controllers;
 using Microsoft.OpenApi.Models;
+using ContaComigoAPI.Interfaces;
 
 namespace ContaComigoAPI
 {
@@ -17,7 +18,7 @@ namespace ContaComigoAPI
         public void ConfigureServices(IServiceCollection services)
         {
             // Registro dos serviços
-            services.AddScoped<IUserService, UserServices>();
+            services.AddScoped<IUserService, UserServices>(); // Corrigido o nome do serviço aqui
             services.AddScoped<IExpenseService, ExpenseServices>();
 
             // Configuração do Swagger
